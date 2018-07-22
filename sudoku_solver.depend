@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1532298678 source:c:\users\haji\desktop\sudoku_solver\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+	<fstream>
+
+1532298678 source:c:\users\haji\documents\github\sudoku-solver\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<vector>
+	<fstream>
+
