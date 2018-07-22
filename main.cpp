@@ -9,7 +9,7 @@ struct cell {
     bool is_fixed=false;
     int number=0;
 };
-//prints soduko board
+//prints sudoku board
 void print_board (vector< vector<cell> > &board);
 //fills number in struct cell
 void fill_number(vector< vector<cell> > &board, int pos_row, int pos_column, int number_to_fill, bool is_fixed);
@@ -37,23 +37,23 @@ void main_file_read(vector< vector<cell> > &board);
 int main()
 {
     const int number_of_rows=9;
-    vector< vector<struct cell> > soduko_board(number_of_rows, vector<cell>(number_of_rows));
+    vector< vector<struct cell> > sudoku_board(number_of_rows, vector<cell>(number_of_rows));
 
-    main_file_write(soduko_board);
-    cout << "A file called soduko_board.txt has been created in your folder.\nFill the board and save it. \nPress enter to continue.\n";
+    main_file_write(sudoku_board);
+    cout << "A file called sudoku_board.txt has been created in your folder.\nFill the board and save it. \nPress enter to continue.\n";
     cin.get();
     cin.clear();
-    main_file_read(soduko_board);
+    main_file_read(sudoku_board);
 
     cout << "This is your board:" << endl;
-    print_board(soduko_board);
+    print_board(sudoku_board);
 
-    if (verify_board(soduko_board) && brute_force(soduko_board))
+    if (verify_board(sudoku_board) && brute_force(sudoku_board))
     {
         cout << "Press enter to solve." << endl;
         cin.get();
         cout << "Here is your solved board:\n";
-        print_board(soduko_board);
+        print_board(sudoku_board);
     }
 
 
@@ -61,7 +61,7 @@ int main()
     return 0;
 }
 
-bool brute_force(vector< vector<cell> > &board, int pos_row, int pos_column, int value_to_set) //parameters are the 2D soduko array and position in board
+bool brute_force(vector< vector<cell> > &board, int pos_row, int pos_column, int value_to_set) //parameters are the 2D sudoku array and position in board
 {
     if (board[pos_row][pos_column].is_fixed)
     {
@@ -184,65 +184,65 @@ bool verify_board(vector< vector<cell> > &board)
 void main_file_write(vector< vector<cell> > &board)
 {
     int number_of_rows=board.size();
-    ofstream soduko_file("soduko_board.txt");
-    soduko_file << "  ";
+    ofstream sudoku_file("sudoku_board.txt");
+    sudoku_file << "  ";
     for (int i=0;i<(number_of_rows/3);i++)
     {
         for (int j=0; j<3; j++)
-            {soduko_file<< " " << (3*i)+j+1;
+            {sudoku_file<< " " << (3*i)+j+1;
             }
-        soduko_file << "   ";
+        sudoku_file << "   ";
     }
-    soduko_file << "\n";
-    soduko_file << "  +";
+    sudoku_file << "\n";
+    sudoku_file << "  +";
     for (int i=0; i<(number_of_rows-1); i++)
-    {soduko_file << "--";}
-    soduko_file << "-";
+    {sudoku_file << "--";}
+    sudoku_file << "-";
     for (int i=0;i<(number_of_rows/4);i++)
-    {soduko_file << "---";}
-    soduko_file << "+";
-    soduko_file << "\n";
+    {sudoku_file << "---";}
+    sudoku_file << "+";
+    sudoku_file << "\n";
     for (int row=0; row<number_of_rows; row++)
     {
-        soduko_file << row+1 << " ";
+        sudoku_file << row+1 << " ";
         for (int column=0; column<number_of_rows; column++)
         {
             if (board[row][column].number>0 && board[row][column].number<=9)
-            soduko_file << "|" << board[row][column].number;
-            else soduko_file << "|" << ".";
+            sudoku_file << "|" << board[row][column].number;
+            else sudoku_file << "|" << ".";
             if ((column+1)%3==0)
-                soduko_file << "|  ";
+                sudoku_file << "|  ";
         }
         if ((row+1)%3==0 && ((row+1)!=number_of_rows))
         {
-            soduko_file << "\n";
-            soduko_file << "  |";
+            sudoku_file << "\n";
+            sudoku_file << "  |";
             for (int row=0; row<(number_of_rows-1); row++)
-            {soduko_file << "--";}
-            soduko_file << "-";
+            {sudoku_file << "--";}
+            sudoku_file << "-";
             for (int row=0;row<(number_of_rows/4);row++)
-            {soduko_file << "---";}
-            soduko_file << "|";
+            {sudoku_file << "---";}
+            sudoku_file << "|";
         }
-        soduko_file << "\n";
+        sudoku_file << "\n";
     }
-    soduko_file << "  +";
+    sudoku_file << "  +";
     for (int i=0; i<(number_of_rows-1); i++)
-    {soduko_file << "--";}
-    soduko_file << "-";
+    {sudoku_file << "--";}
+    sudoku_file << "-";
     for (int i=0;i<(number_of_rows/4);i++)
-    {soduko_file << "---";}
-    soduko_file << "+";
-    soduko_file << "\n";
-    soduko_file.close();
+    {sudoku_file << "---";}
+    sudoku_file << "+";
+    sudoku_file << "\n";
+    sudoku_file.close();
 }
 
 void main_file_read(vector< vector<cell> > &board)
 {
     string line;
-    ifstream soduko_file_read("soduko_board.txt");
+    ifstream sudoku_file_read("sudoku_board.txt");
     int row=0;
-    while (getline(soduko_file_read, line))
+    while (getline(sudoku_file_read, line))
     {
         if (isdigit(line[0]) && line[1]==' ' && line[2]=='|')
         {
@@ -261,7 +261,7 @@ void main_file_read(vector< vector<cell> > &board)
         }
     }
 
-    soduko_file_read.close();
+    sudoku_file_read.close();
 }
 
 void print_board (vector< vector<cell> > &board)
